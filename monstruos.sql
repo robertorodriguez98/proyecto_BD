@@ -24,13 +24,13 @@ CONSTRAINT PRIMARY KEY (idMapa)
 
 CREATE TABLE Objetos(
 idObjetos VARCHAR(2),
-mapa VARCHAR(2),
+idMapa VARCHAR(2),
 monstruo VARCHAR(2),
 nombre VARCHAR(15),
 valor DECIMAL(4),
 rareza VARCHAR(1),
 conseguido DATE,
-CONSTRAINT fk_mapa FOREIGN KEY (mapa) REFERENCES Mapas(idMapa),
+CONSTRAINT fk_mapa FOREIGN KEY (idMapa) REFERENCES Mapas(idMapa),
 CONSTRAINT fk_monstruo FOREIGN KEY (monstruo) REFERENCES Monstruos(idMonstruo),
 CONSTRAINT PRIMARY KEY (idObjetos)
 );
