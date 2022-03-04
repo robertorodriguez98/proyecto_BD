@@ -1,4 +1,9 @@
 CREATE DATABASE monster_hunter;
+
+CREATE USER 'jugador'@'%' IDENTIFIED BY 'jugador';
+GRANT ALL PRIVILEGES ON monster_hunter.* TO 'jugador'@'%';
+FLUSH PRIVILEGES;
+
 USE monster_hunter;
 
 CREATE TABLE Monstruos(
