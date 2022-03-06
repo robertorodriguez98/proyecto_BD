@@ -27,10 +27,12 @@ def MonstruoSubcadena(db,monstruo):
     sql = "SELECT * FROM Monstruos WHERE nombre REGEXP '^%s'"%(monstruo)
     cursor = db.cursor(MySQLdb.cursors.DictCursor)
     try:
-       cursor.execute(sql)
-       registros = cursor.fetchall()
-       for registro in registros:
-          print(registro["nombre"])
+        cursor.execute(sql)
+        registros = cursor.fetchall()
+        for registro in registros:
+            print(registro["nombre"])
+        return registro["nombre"]
+
     except:
        print("Error en la consulta")
 
@@ -54,6 +56,19 @@ def NuevoMonstruo(db,nuevo):
         db.commit()
     except:
         print("Error al insertar.")
+        db.rollback()
+
+def borrarObjeto(db,monstruo):
+    buscar = MonstruoSubcadena(db,monstruo)
+    sql="delete from Objetos where monstruo=(select idMonstruo from Monstruos where nombre = '%s')" % buscar
+    cursor = db.cursor()
+    try:
+        cursor.execute(sql)
+        db.commit()
+        if cursor.rowcount==0:
+            print("No hay objetos relacionados con ese monstruo")
+    except:
+        print("Error al borrar.")
         db.rollback()
 
 def MostrarMenu():

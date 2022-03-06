@@ -11,7 +11,6 @@ while opcion != 0:
     elif opcion == 3:
         monstruo = input("dime el inicio del nombre del monstruo: ")
         ObjetoMonstruo(db,monstruo)
-    
     elif opcion == 4:
         nuevo={}
         nuevo["idMonstruo"]=input("Identificador:")
@@ -19,5 +18,10 @@ while opcion != 0:
         nuevo["tipo"]=input("tipo (Dragon Anciano,Bestia de Colmillos,Anfibio):")
         nuevo["tamano"]=float(input("tamano:"))
         NuevoMonstruo(db,nuevo)
+    elif opcion == 5:
+        monstruo = input("dime el inicio del nombre del monstruo: ")
+        borrarObjeto(db,monstruo)
+
+    
     opcion=MostrarMenu()
 Desconectar_BD(db)
