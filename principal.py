@@ -21,6 +21,9 @@ while opcion != 0:
     elif opcion == 5:
         monstruo = input("dime el inicio del nombre del monstruo: ")
         borrarObjeto(db,monstruo)
+    elif opcion == 6:
+        porcentaje = float(input("dime el porcentaje"))
+        AumentarValor(db,porcentaje)
 
     
     opcion=MostrarMenu()

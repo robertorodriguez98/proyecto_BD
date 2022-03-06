@@ -71,6 +71,16 @@ def borrarObjeto(db,monstruo):
         print("Error al borrar.")
         db.rollback()
 
+def AumentarValor(db,porcentaje):
+    sql = "update Objetos SET valor = (SELECT precio from objetos)*%f"%porcentaje
+    cursor = db.cursor()
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except:
+        print("Error al cambiar")
+        db.rollback()
+
 def MostrarMenu():
     menu='''
     1. Lista los mapas y el total de zonas que tiene cada uno.
