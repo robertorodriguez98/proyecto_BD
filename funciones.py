@@ -36,7 +36,8 @@ def MonstruoSubcadena(db,monstruo):
 
 def ObjetoMonstruo(db,monstruo):
     MonstruoSubcadena(db,monstruo)
-    sql = "SELECT * FROM Objetos WHERE monstruo IN (SELECT idMonstruo FROM Monstruos WHERE nombre REGEXP '^%s'"%(monstruo)
+    sql = "SELECT * FROM Objetos WHERE monstruo = (SELECT idMonstruo FROM Monstruos WHERE nombre REGEXP '^%s')"%(monstruo)
+    cursor = db.cursor(MySQLdb.cursors.DictCursor)
     try:
        cursor.execute(sql)
        registros = cursor.fetchall()
@@ -44,6 +45,16 @@ def ObjetoMonstruo(db,monstruo):
           print(registro["nombre"])
     except:
        print("Error en la consulta")
+
+def NuevoMonstruo(db,nuevo):
+    cursor = db.cursor()
+    sql="insert into Monstruos values (%s, '%s', '%s', %f )" % (nuevo["idMonstruo"],nuevo["nombre"],nuevo["tipo"],nuevo["tamano"])
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except:
+        print("Error al insertar.")
+        db.rollback()
 
 def MostrarMenu():
     menu='''
