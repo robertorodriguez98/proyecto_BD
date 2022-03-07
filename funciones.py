@@ -72,7 +72,7 @@ def borrarObjeto(db,monstruo):
         db.rollback()
 
 def AumentarValor(db,porcentaje):
-    sql = "update Objetos SET valor = (SELECT precio from objetos)*%f"%porcentaje
+    sql = "update Objetos SET valor = valor+(valor*%f)/100"%porcentaje
     cursor = db.cursor()
     try:
         cursor.execute(sql)
